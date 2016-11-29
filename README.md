@@ -14,6 +14,22 @@ python3 main.py
 
 That should use the default curve (secp160r2) and have Alice and Bob generate keys and see if they can generate a shared secret.
 
+### Networked Example
+
+Using simple TCP Sockets we also can demonstrate how to securely verify generate the shared secret without disclosing the private keys. To do just run a different script in two terminals:
+
+#### Terminal 1
+```
+python3 networked.py server
+```
+
+#### Terminal 2
+```
+python3 networked.py
+```
+
+They will connect to each other and do the key exchanges via networked communications instead of in memory in the toy example contained in `main.py`.
+
 ## Using different curves
 
 See http://www.secg.org/SEC2-Ver-1.0.pdf and take the parameters from there. I used secp160r2 from page 11.
