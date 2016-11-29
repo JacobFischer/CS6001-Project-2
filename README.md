@@ -18,17 +18,21 @@ That should use the default curve (secp160r2) and have Alice and Bob generate ke
 
 Using simple TCP Sockets we also can demonstrate how to securely verify generate the shared secret without disclosing the private keys. To do just run a different script in two terminals:
 
-#### Terminal 1
+#### First Terminal
 ```
-python3 networked.py server
+python3 main.py --server
 ```
 
-#### Terminal 2
+#### Second Terminal
 ```
-python3 networked.py
+python3 main.py --client
 ```
 
 They will connect to each other and do the key exchanges via networked communications instead of in memory in the toy example contained in `main.py`.
+
+### Curve Overrides
+
+If you wish to control the values of the curve by choosing a different defined curve in the `curves.py` file via the CLI `--curve NAME`. Alternatively you can override specific curve properties via their name, e.g. `--a 0 --b 7`. Though be warned, if you define a custom curve and it is not a proper elliptical curve the ECDHE will probably fail and throw an exception complaining something is wrong (e.g. a point cannot be found on the given curve because it is invalid).
 
 ## Using different curves
 
@@ -36,7 +40,7 @@ See http://www.secg.org/SEC2-Ver-1.0.pdf and take the parameters from there. I u
 
 ## Documentation
 
-Everything is fully documented using docstrings. Care has been taken to adhere to [Google][google] and [PEP8][pep8]'s style guide.
+Everything is fully documented using docstrings. Care has been taken to adhere to [Google][google] and [PEP8][pep8]'s style guidelines.
 
 [python]: https://www.python.org/
 [google]: https://google.github.io/styleguide/pyguide.html

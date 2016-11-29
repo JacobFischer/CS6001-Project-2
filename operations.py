@@ -4,6 +4,7 @@ from point import Point
 # note: Math.pow seems to give out incorrect
 #   return values with numbers these large :P
 
+
 def group_add(p, q):
     """Group Addition: adds two points p and q returning a new point r
 
@@ -13,11 +14,15 @@ def group_add(p, q):
 
         Returns:
             Point: an r such that r = p + q on the EllipticeCurve they share
+
+        Raises:
+            Exception: If the two points being added are not on the save curve
     """
 
     # check to make sure both points are on this curve
     if p.curve != q.curve:
-        raise Exception("{} and {} are not on the same curves {} and {}"
+        raise Exception(
+            "{} and {} are not on the same curves {} and {}"
             .format(p, q, p.curve, q.curve)
         )
 
@@ -50,6 +55,7 @@ def group_add(p, q):
 
     return Point(x, y, p.curve)
 
+
 def scalar_multiplication(p, k):
     """Calculates q = p * k, using repeated addition
 
@@ -78,7 +84,7 @@ def scalar_multiplication(p, k):
     # q = p + p + ... + p, k times (done via recursion)
     # From: https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication
     if k == 0:
-        return 0 # computation complete
+        return 0  # computation complete
     elif k == 1:
         return p
     elif k % 2 == 1:
@@ -87,6 +93,7 @@ def scalar_multiplication(p, k):
     else:
         # doubling when k is even
         return scalar_multiplication(group_add(p, p), k//2)
+
 
 def modular_inverse(k, p):
     """Calculates the inverse of k modulo p.
@@ -112,7 +119,8 @@ def modular_inverse(k, p):
     if (x * k) % p != 1:
         raise Exception("calculated x is not the inverse modulus of p and k")
 
-    return x % p # just for safety
+    return x % p  # just for safety
+
 
 def xgcd(b, n):
     """ The Extended Euclidean algorithm

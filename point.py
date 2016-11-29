@@ -1,6 +1,7 @@
 # Note: math.inf doesn't seem to work, but this does :P
 inf = float("inf")
 
+
 class Point:
     """Represents a point on an elliptical curve
     """
@@ -46,12 +47,12 @@ class Point:
             Point: -self, this point inverted along the y axis
         """
         if self.is_infinity():
-            return self # no need to negate
+            return self  # no need to negate
 
         p = Point(
-            x = self.x,
-            y = -self.y % self.curve.p,
-            curve = self.curve
+            x=self.x,
+            y=-self.y % self.curve.p,
+            curve=self.curve
         )
 
         return p
@@ -64,7 +65,8 @@ class Point:
             point: the other point to compare our (x, y) to
 
         Returns:
-            bool: True if the two points are on the same (x, y), False otherwise
+            bool: True if the two points are on the same (x, y),
+                False otherwise
         """
         return self.x == point.x and self.y == point.y
 
